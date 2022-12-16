@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SOPHOS</string>
+    <string name="login">Ingresar</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="biometric">Ingresar con huella</string>
+    <string name="header_text">Ingresa tus datos para acceder </string>
+
+
+</resources>
