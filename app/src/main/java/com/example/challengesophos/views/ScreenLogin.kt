@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -65,7 +66,7 @@ fun HeaderImage() {
 fun HeaderText() {
     Text(
         text = stringResource(R.string.header_text),
-        color = Color(0xFF7800FD),
+        color = colorResource(id = R.color.purple),
         fontSize = 18.sp, fontWeight = FontWeight.W600,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(horizontal = 60.dp)
@@ -81,26 +82,26 @@ fun InputEmail() {
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Mail,
-                contentDescription = null, tint = Color(0xFF7800FD)
+                contentDescription = null, tint = colorResource(id = R.color.purple)
             )
         },
         modifier = Modifier
             .fillMaxWidth()
             .border(
-                2.dp, SolidColor(Color(0xFF7800FD)),
+                2.dp, SolidColor(colorResource(id = R.color.purple)),
                 MaterialTheme.shapes.large
             ),
         placeholder = {
             Text(
                 text = stringResource(id = R.string.email),
-                color = Color(0xFF7800FD)
+                color = colorResource(id = R.color.purple)
             )
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(0xFF7800FD),
+            textColor = colorResource(id = R.color.purple),
             backgroundColor = Color.White,
             unfocusedIndicatorColor = Color.Transparent
         )
@@ -114,34 +115,34 @@ fun PaswordInput() {
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.VpnKey,
-                contentDescription = null, tint = Color(0xFF7800FD)
+                contentDescription = null, tint = colorResource(id = R.color.purple)
             )
         },
         trailingIcon = {
             Icon(
                 imageVector = Icons.Default.Visibility,
-                contentDescription = null, tint = Color(0xFF7800FD)
+                contentDescription = null, tint = colorResource(id = R.color.purple)
             )
         },
         modifier = Modifier
             .fillMaxWidth()
             .border(
-                2.dp, SolidColor(Color(0xFF7800FD)),
+                2.dp, SolidColor(colorResource(id = R.color.purple)),
                 MaterialTheme.shapes.large
             ),
         placeholder = {
             Text(
                 text = stringResource(R.string.password),
-                color = Color(0xFF7800FD)
+                color = colorResource(id = R.color.purple)
             )
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         singleLine = true,
         maxLines = 1,
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Color(0xFF7800FD),
+            textColor = colorResource(id = R.color.purple),
             backgroundColor = Color.White,
-            focusedLabelColor = Color(0xFF7800FD),
+            focusedLabelColor = colorResource(id = R.color.purple),
             unfocusedIndicatorColor = Color.Transparent
         )
     )
@@ -172,9 +173,9 @@ fun BiometricButton() {
             .height(48.dp),
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.White,
-            contentColor = Color(0xFF7800FD)
+            contentColor = colorResource(id = R.color.purple)
         ),
-        border = BorderStroke(2.dp, color = Color(0xFF7800FD)),
+        border = BorderStroke(2.dp, color = colorResource(id = R.color.purple)),
         shape = MaterialTheme.shapes.large
     ) {
         Icon(painterResource(id = R.drawable.fingerprint), contentDescription = null)
