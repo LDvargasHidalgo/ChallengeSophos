@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -95,7 +96,7 @@ fun SendDocuments() {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Enviar Documentos",
+                    text = stringResource(id = R.string.send_docs),
                     fontSize = 18.sp, color = colorResource(id = R.color.pink),
                     fontWeight = FontWeight.W600
                 )

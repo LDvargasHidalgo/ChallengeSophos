@@ -65,7 +65,7 @@ fun HeaderImage() {
 @Composable
 fun HeaderText() {
     Text(
-        text = stringResource(R.string.header_text),
+        text = stringResource(id = R.string.header_text),
         color = colorResource(id = R.color.purple),
         fontSize = 18.sp, fontWeight = FontWeight.W600,
         textAlign = TextAlign.Center,
@@ -158,7 +158,7 @@ fun LoginButton() {
         shape = MaterialTheme.shapes.large
     ) {
         Text(
-            text = stringResource(R.string.login),
+            stringResource(id = R.string.get_into),
             fontSize = 18.sp
         )
     }

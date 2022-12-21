@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.challengesophos.ui.theme.ChallengeSophosTheme
+import com.example.challengesophos.views.ScreenSendDocuments
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,16 +23,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                   ScreenSendDocuments()
                 }
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
 }
 
 @Preview(showBackground = true)
@@ -39,7 +35,7 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     ChallengeSophosTheme {
         Surface(modifier = Modifier.fillMaxSize()){
-            Greeting("Android")
+            ScreenSendDocuments()
         }
 
     }
