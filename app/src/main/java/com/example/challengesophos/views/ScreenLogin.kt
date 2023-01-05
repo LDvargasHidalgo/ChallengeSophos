@@ -12,7 +12,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VpnKey
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
@@ -110,6 +110,7 @@ fun InputEmail() {
 
 @Composable
 fun PaswordInput() {
+    var passwordVisibility by remember{ mutableStateOf(false) }
     TextField(
         value = "", onValueChange = {},
         leadingIcon = {

@@ -11,5 +11,10 @@
     <string name="document_type">Tipo de documento </string>
     <string name="document_number">Número de documento </string>
     <string name="titulo_docs">Documentos</string>
-
+    <string name="office">Oficinas</string>
+    <string name="names">Nombres</string>
+    <string name="last_name">Apellidos</string>
+    <string name="city">Ciudad</string>
+    <string name="send">Enviar</string>
+    <string name="document">Documento</string>
 </resources>

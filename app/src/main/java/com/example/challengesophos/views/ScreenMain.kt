@@ -109,7 +109,8 @@ fun SendDocuments() {
 
                 ) {
                 Text(
-                    text = "Ingresar",
+                    text = stringResource(id = R.string.get_into),
+                    
                     fontSize = 16.sp, color =colorResource(id = R.color.pink)
                 )
                 Spacer(modifier = Modifier.width(12.dp))
@@ -143,7 +144,7 @@ fun ShowDocuments() {
                 )
                 Spacer(modifier = (Modifier.width(8.dp)))
                 Text(
-                    text = "Ver documentos", fontSize = 18.sp, color = colorResource(id = R.color.blue),
+                    text = stringResource(id = R.string.show_docs), fontSize = 18.sp, color = colorResource(id = R.color.blue),
                     fontWeight = FontWeight.W600
                 )
             }
@@ -153,7 +154,7 @@ fun ShowDocuments() {
                 border = BorderStroke(2.dp, color = colorResource(id = R.color.blue)),
                 shape = Shapes.large,
             ) {
-                Text(text = "Ingresar", fontSize = 16.sp)
+                Text(text = stringResource(id = R.string.get_into), fontSize = 16.sp)
                 Spacer(modifier = Modifier.width(12.dp))
                 Icon(
                     imageVector = Icons.Default.ArrowForward,
@@ -185,7 +186,7 @@ fun Office() {
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = "Oficinas",
+                    text = stringResource(id = R.string.office),
                     fontSize = 18.sp, color = colorResource(id = R.color.green),
                     fontWeight = FontWeight.W600
                 )
@@ -197,7 +198,7 @@ fun Office() {
                 shape = Shapes.large,
             ) {
                 Text(
-                    text = "Ingresar", fontSize = 16.sp,
+                    text = stringResource(id = R.string.get_into), fontSize = 16.sp,
                     color = colorResource(id = R.color.green)
                 )
 
