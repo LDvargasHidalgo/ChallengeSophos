@@ -18,14 +18,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.challengesophos.R
 import com.example.challengesophos.ui.theme.Shapes
 
 @Composable
-fun ScreenMain() {
+fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
     Scaffold(
         topBar = {
-            NavigatioTop()
+            NavigatioTop(orEmpty)
         }) {
         Column(
             Modifier
@@ -45,11 +46,11 @@ fun ScreenMain() {
 
 
 @Composable
-fun NavigatioTop() {
+fun NavigatioTop(name:String) {
     TopAppBar(
         title = {
             Text(
-                text = "Usuario",
+                text =name,
                 Modifier.padding(horizontal = 12.dp),
                 color = colorResource(id = R.color.purple)
             )
@@ -213,18 +214,7 @@ fun Office() {
 }
 
 
-@Preview(showSystemUi = true)
-@Composable
-fun MainPreview() {
-    ScreenMain()
-}
 
-@Preview(showBackground = true)
-@Composable
-fun ElementPreview() {
-    Column {
-        SendDocuments()
-        Office()
-    }
-}
+
+
 

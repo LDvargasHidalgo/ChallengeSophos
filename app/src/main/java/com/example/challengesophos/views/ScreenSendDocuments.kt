@@ -25,10 +25,11 @@ import com.example.challengesophos.R
 import com.example.challengesophos.ui.theme.Shapes
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.navigation.NavHostController
 
 
 @Composable
-fun ScreenSendDocuments() {
+fun ScreenSendDocuments(navigationController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -272,8 +273,3 @@ fun BottomBottons() {
 }
 
 
-@Preview(showSystemUi = true)
-@Composable
-fun EnvioPreview() {
-    ScreenSendDocuments()
-}

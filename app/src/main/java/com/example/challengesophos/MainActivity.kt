@@ -6,12 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.challengesophos.login.ScreenLogin
+import com.example.challengesophos.navigation.Routes
 import com.example.challengesophos.ui.theme.ChallengeSophosTheme
-import com.example.challengesophos.views.ScreenSendDocuments
+import com.example.challengesophos.view_model.LoginViewModel
+import com.example.challengesophos.views.OfficeMap
+import com.example.challengesophos.views.ScreenMain
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,20 +27,30 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    ScreenLogin()
+                     val navigationController = rememberNavController()
+                     NavHost(
+                         navController = navigationController,
+                         startDestination = Routes.ScreenLogin.route
+                     ) {
+                         composable(Routes.ScreenLogin.route) {
+                             ScreenLogin(
+                                 loginViewModel = LoginViewModel(),
+                                 navigationController
+                             )
+                         }
+                         //composable(Routes.ScreenMain.route) { ScreenMain(navigationController)}
+                         composable("screenMain/{name}") { entry ->
+                             ScreenMain(
+                                 navigationController,
+                                 entry.arguments?.getString("name").orEmpty()
+                             )
+                         }
+                     }
+
                 }
             }
         }
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ChallengeSophosTheme {
-        Surface(modifier = Modifier.fillMaxSize()){
-            ScreenSendDocuments()
-        }
 
-    }
-}

@@ -1,64 +1,100 @@
 package com.example.challengesophos.login
 
 
+import android.app.Activity
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Mail
-import androidx.compose.material.icons.filled.Visibility
-import androidx.compose.material.icons.filled.VpnKey
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.challengesophos.R
-import com.example.challengesophos.ui.theme.ChallengeSophosTheme
+import com.example.challengesophos.model.LoginClient
+import com.example.challengesophos.view_model.LoginViewModel
 
 @Composable
-fun ScreenLogin() {
-    Column(
+fun ScreenLogin(loginViewModel: LoginViewModel, navigationController: NavHostController) {
+    Box(
         Modifier
             .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+            .padding(8.dp)
     ) {
-        HeaderImage()
+        Close(Modifier.align(Alignment.TopEnd))
+        Body(Modifier.align(Alignment.Center), loginViewModel, navigationController)
+
+    }
+}
+
+@Composable
+fun Close(modifier: Modifier) {
+    val activity = LocalContext.current as Activity
+    Icon(
+        tint = colorResource(id = R.color.purple),
+        imageVector = Icons.Default.Close,
+        contentDescription = "close",
+        modifier = modifier.clickable {
+            activity.finish()
+        }
+    )
+}
+
+@Composable
+fun Body(
+    modifier: Modifier,
+    loginViewModel: LoginViewModel,
+    navigationController: NavHostController
+) {
+    val email: String by loginViewModel.email.observeAsState(initial = "")
+    val password: String by loginViewModel.password.observeAsState(initial = "")
+
+    Column(modifier = modifier) {
+        ImageHeader(Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.size(16.dp))
         HeaderText()
-        MySpacer(size = 18)
-        InputEmail()
-        MySpacer(size = 18)
-        PaswordInput()
-        MySpacer(size = 36)
-        LoginButton()
-        MySpacer(size = 18)
+        Spacer(modifier = Modifier.size(16.dp))
+        InputEmail(email) {
+            loginViewModel.onLoginChanged(email = it, password = password)
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        InputPassword(password) {
+            loginViewModel.onLoginChanged(email = email, password = it)
+        }
+        Spacer(modifier = Modifier.size(24.dp))
+        LoginButton(navigationController)
+        Spacer(modifier = Modifier.size(16.dp))
         BiometricButton()
     }
 }
 
 @Composable
-fun HeaderImage() {
+fun ImageHeader(modifier: Modifier) {
     Image(
         painter = painterResource(R.drawable.logosophos),
         contentDescription = "Logo Sophos",
         contentScale = ContentScale.Fit,
-        modifier = Modifier.size(width = 300.dp, height = 150.dp)
+        modifier = modifier.size(width = 300.dp, height = 150.dp)
     )
 }
 
@@ -69,21 +105,21 @@ fun HeaderText() {
         color = colorResource(id = R.color.purple),
         fontSize = 18.sp, fontWeight = FontWeight.W600,
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(horizontal = 60.dp)
+        modifier = Modifier.padding(horizontal = 80.dp)
     )
-
 }
 
-
 @Composable
-fun InputEmail() {
+fun InputEmail(email: String, onTextChanged: (String) -> Unit) {
     TextField(
-        value = "", onValueChange = {},
+        value = email,
+        onValueChange = { onTextChanged(it) },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.Mail,
                 contentDescription = null, tint = colorResource(id = R.color.purple)
             )
+
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -94,6 +130,7 @@ fun InputEmail() {
         placeholder = {
             Text(
                 text = stringResource(id = R.string.email),
+                fontSize = 16.sp,
                 color = colorResource(id = R.color.purple)
             )
         },
@@ -103,27 +140,43 @@ fun InputEmail() {
         colors = TextFieldDefaults.textFieldColors(
             textColor = colorResource(id = R.color.purple),
             backgroundColor = Color.White,
-            unfocusedIndicatorColor = Color.Transparent
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent
         )
     )
 }
 
 @Composable
-fun PaswordInput() {
-    var passwordVisibility by remember{ mutableStateOf(false) }
+fun InputPassword(password: String, onTextChanged: (String) -> Unit) {
+    var passwordVisibility by remember { mutableStateOf(false) }
     TextField(
-        value = "", onValueChange = {},
+        value = password, onValueChange = { onTextChanged(it) },
         leadingIcon = {
             Icon(
                 imageVector = Icons.Default.VpnKey,
-                contentDescription = null, tint = colorResource(id = R.color.purple)
+                contentDescription = null,
+                tint = colorResource(id = R.color.purple)
             )
         },
         trailingIcon = {
-            Icon(
-                imageVector = Icons.Default.Visibility,
-                contentDescription = null, tint = colorResource(id = R.color.purple)
-            )
+            val image = if (passwordVisibility) {
+                Icons.Default.VisibilityOff
+            } else {
+                Icons.Default.Visibility
+            }
+
+            IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                Icon(
+                    imageVector = image,
+                    contentDescription = "Show Password",
+                    tint = colorResource(id = R.color.purple)
+                )
+            }
+        },
+        visualTransformation = if (passwordVisibility) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -134,6 +187,7 @@ fun PaswordInput() {
         placeholder = {
             Text(
                 text = stringResource(R.string.password),
+                fontSize = 16.sp,
                 color = colorResource(id = R.color.purple)
             )
         },
@@ -144,19 +198,30 @@ fun PaswordInput() {
             textColor = colorResource(id = R.color.purple),
             backgroundColor = Color.White,
             focusedLabelColor = colorResource(id = R.color.purple),
-            unfocusedIndicatorColor = Color.Transparent
+            focusedIndicatorColor = Color.Transparent
         )
     )
 }
 
+
+
 @Composable
-fun LoginButton() {
+fun LoginButton(navigationController: NavHostController) {
+
     Button(
-        onClick = { /*TODO*/ },
+        onClick = {
+           
+            navigationController.navigate("screenMain/Daniela")
+        },
         modifier = Modifier
             .fillMaxWidth()
             .height(48.dp),
-        shape = MaterialTheme.shapes.large
+        shape = MaterialTheme.shapes.large,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(id = R.color.purple),
+            contentColor = Color.White
+
+        )
     ) {
         Text(
             stringResource(id = R.string.get_into),
@@ -164,6 +229,7 @@ fun LoginButton() {
         )
     }
 }
+
 
 @Composable
 fun BiometricButton() {
@@ -193,13 +259,6 @@ fun MySpacer(size: Int) {
     Spacer(modifier = Modifier.height((size.dp)))
 }
 
-@Preview(showSystemUi = true)
-@Composable
-fun LoginPreview() {
-    ChallengeSophosTheme {
-        ScreenLogin()
-    }
-}
 
 
 
