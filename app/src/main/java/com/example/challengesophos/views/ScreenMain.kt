@@ -3,6 +3,7 @@ package com.example.challengesophos.views
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -20,7 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.challengesophos.R
+import com.example.challengesophos.navigation.Routes
 import com.example.challengesophos.ui.theme.Shapes
+import com.example.challengesophos.view_model.LoginViewModel
 
 @Composable
 fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
@@ -39,7 +42,7 @@ fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
             Spacer(modifier = Modifier.height(20.dp))
             ShowDocuments()
             Spacer(modifier = Modifier.height(24.dp))
-            Office()
+            Office(navigationController)
         }
     }
 }
@@ -51,8 +54,9 @@ fun NavigatioTop(name:String) {
         title = {
             Text(
                 text =name,
-                Modifier.padding(horizontal = 12.dp),
-                color = colorResource(id = R.color.purple)
+                Modifier
+                    .padding(horizontal = 12.dp)
+
             )
         },
         backgroundColor = Color(0xFFFEFEFE),
@@ -168,7 +172,7 @@ fun ShowDocuments() {
 
 
 @Composable
-fun Office() {
+fun Office(navController:NavHostController) {
     Card(
         modifier = Modifier.padding(horizontal = 16.dp),
         shape = Shapes.large,
@@ -193,14 +197,16 @@ fun Office() {
                 )
             }
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = {        },
                 Modifier.align(Alignment.End),
                 border = BorderStroke(2.dp, color = colorResource(id = R.color.green)),
                 shape = Shapes.large,
             ) {
                 Text(
-                    text = stringResource(id = R.string.get_into), fontSize = 16.sp,
-                    color = colorResource(id = R.color.green)
+                    text = stringResource(id = R.string.get_into),
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.green),
+
                 )
 
                 Spacer(modifier = Modifier.width(12.dp))

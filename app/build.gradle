@@ -57,6 +57,7 @@ dependencies {
     implementation "androidx.compose.material:material:$compose_ui_version"
     //View Model
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation  "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
     //liveData
     implementation "androidx.compose.runtime:runtime-livedata:1.2.1"
     // iconos

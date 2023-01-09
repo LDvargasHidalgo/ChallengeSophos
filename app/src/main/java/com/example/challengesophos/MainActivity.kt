@@ -14,8 +14,8 @@ import com.example.challengesophos.login.ScreenLogin
 import com.example.challengesophos.navigation.Routes
 import com.example.challengesophos.ui.theme.ChallengeSophosTheme
 import com.example.challengesophos.view_model.LoginViewModel
-import com.example.challengesophos.views.OfficeMap
 import com.example.challengesophos.views.ScreenMain
+import com.example.challengesophos.views.ScreenOfficeMap
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +27,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+
+                    //NAVIGATION
                      val navigationController = rememberNavController()
                      NavHost(
                          navController = navigationController,
@@ -38,6 +40,13 @@ class MainActivity : ComponentActivity() {
                                  navigationController
                              )
                          }
+
+                         composable(Routes.ScreenOfficeMap.route) {
+                            ScreenOfficeMap(loginViewModel = LoginViewModel(),
+                                navigationController)
+                         }
+
+
                          //composable(Routes.ScreenMain.route) { ScreenMain(navigationController)}
                          composable("screenMain/{name}") { entry ->
                              ScreenMain(
@@ -46,7 +55,6 @@ class MainActivity : ComponentActivity() {
                              )
                          }
                      }
-
                 }
             }
         }

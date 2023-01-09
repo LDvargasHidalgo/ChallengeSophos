@@ -2,6 +2,8 @@ package com.example.challengesophos.login
 
 
 import android.app.Activity
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -31,7 +33,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.challengesophos.R
-import com.example.challengesophos.model.LoginClient
 import com.example.challengesophos.view_model.LoginViewModel
 
 @Composable
@@ -82,7 +83,7 @@ fun Body(
             loginViewModel.onLoginChanged(email = email, password = it)
         }
         Spacer(modifier = Modifier.size(24.dp))
-        LoginButton(navigationController)
+        LoginButton(navigationController, loginViewModel)
         Spacer(modifier = Modifier.size(16.dp))
         BiometricButton()
     }
@@ -206,12 +207,11 @@ fun InputPassword(password: String, onTextChanged: (String) -> Unit) {
 
 
 @Composable
-fun LoginButton(navigationController: NavHostController) {
-
+fun LoginButton(navigationController: NavHostController, loginViewModel: LoginViewModel) {
+    val context =LocalContext.current
     Button(
         onClick = {
-           
-            navigationController.navigate("screenMain/Daniela")
+            loginViewModel.doLogin(navigationController,loginViewModel, context)
         },
         modifier = Modifier
             .fillMaxWidth()
@@ -228,6 +228,9 @@ fun LoginButton(navigationController: NavHostController) {
             fontSize = 18.sp
         )
     }
+}
+fun mToast(context: Context){
+    Toast.makeText(context, "Usuario o contraseña incorrectos", Toast.LENGTH_LONG).show()
 }
 
 

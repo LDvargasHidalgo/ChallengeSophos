@@ -5,4 +5,5 @@ sealed class Routes(val route:String) {
     //object ScreenMain:Routes("screenMain")
     object ScreenSendDocuments:Routes("ScreenSendDocuments")
     object ScreenConsultDocument:Routes("ScreenConsultDocument")
+    object ScreenOfficeMap:Routes("ScreenOfficeMap")
 }
