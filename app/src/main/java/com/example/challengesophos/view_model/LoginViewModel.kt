@@ -7,13 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
-import com.example.challengesophos.core.RetrofilHelper
+import com.example.challengesophos.core.RetrofitHelper
 import com.example.challengesophos.login.mToast
-import com.example.challengesophos.model.LoginClient
-import com.example.challengesophos.model.LoginResponse
+import com.example.challengesophos.model.LoginService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 
 class LoginViewModel : ViewModel() {
@@ -35,7 +33,7 @@ class LoginViewModel : ViewModel() {
     ) {
         viewModelScope.launch(Dispatchers.Main) {
 
-            val response = RetrofilHelper.getRetrofit().create(LoginClient::class.java).doLogin(
+            val response = RetrofitHelper.getRetrofit().create(LoginService::class.java).doLogin(
                 loginViewModel.email.value.toString(),
                 loginViewModel.password.value.toString()
             )
@@ -53,13 +51,12 @@ class LoginViewModel : ViewModel() {
                         mToast(context)
                     }
                 } else {
-                    Log.d("Response", "null")
+                    Log.d("Response", "Login response is null")
                 }
             } else {
                 Log.d("Response", "weerr" + response.errorBody())
             }
         }
-
     }
 }
 

@@ -3,7 +3,6 @@ package com.example.challengesophos.views
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -16,20 +15,17 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.challengesophos.R
-import com.example.challengesophos.navigation.Routes
 import com.example.challengesophos.ui.theme.Shapes
-import com.example.challengesophos.view_model.LoginViewModel
 
 @Composable
 fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
     Scaffold(
         topBar = {
-            NavigatioTop(orEmpty)
+            NavigationTop(orEmpty)
         }) {
         Column(
             Modifier
@@ -38,9 +34,9 @@ fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
         ) {
             TopImage()
             Spacer(modifier = Modifier.height(24.dp))
-            SendDocuments()
+            SendDocuments(navigationController)
             Spacer(modifier = Modifier.height(20.dp))
-            ShowDocuments()
+            ShowDocuments(navigationController)
             Spacer(modifier = Modifier.height(24.dp))
             Office(navigationController)
         }
@@ -49,14 +45,13 @@ fun ScreenMain(navigationController: NavHostController, orEmpty: String) {
 
 
 @Composable
-fun NavigatioTop(name:String) {
+fun NavigationTop(name:String) {
     TopAppBar(
         title = {
             Text(
                 text =name,
                 Modifier
                     .padding(horizontal = 12.dp)
-
             )
         },
         backgroundColor = Color(0xFFFEFEFE),
@@ -81,7 +76,7 @@ fun TopImage() {
 }
 
 @Composable
-fun SendDocuments() {
+fun SendDocuments(navController: NavHostController) {
     Card(
         modifier = Modifier.padding(horizontal = 16.dp),
         shape = Shapes.large,
@@ -107,7 +102,7 @@ fun SendDocuments() {
                 )
             }
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = {navController.navigate("screenSendDocument") },
                 Modifier.align(Alignment.End),
                 border = BorderStroke(2.dp, color = colorResource(id = R.color.pink)),
                 shape = Shapes.large,
@@ -130,7 +125,7 @@ fun SendDocuments() {
 
 
 @Composable
-fun ShowDocuments() {
+fun ShowDocuments(navController: NavHostController) {
     Card(
         modifier = Modifier.padding(horizontal = 16.dp),
         shape = Shapes.large,
@@ -154,7 +149,7 @@ fun ShowDocuments() {
                 )
             }
             OutlinedButton(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate("screenConsultDocuments") },
                 Modifier.align(Alignment.End),
                 border = BorderStroke(2.dp, color = colorResource(id = R.color.blue)),
                 shape = Shapes.large,
@@ -197,7 +192,7 @@ fun Office(navController:NavHostController) {
                 )
             }
             OutlinedButton(
-                onClick = {        },
+                onClick = { navController.navigate("screenOfficeMap")       },
                 Modifier.align(Alignment.End),
                 border = BorderStroke(2.dp, color = colorResource(id = R.color.green)),
                 shape = Shapes.large,

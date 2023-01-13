@@ -2,7 +2,7 @@ package com.example.challengesophos.model
 
 import com.google.gson.annotations.SerializedName
 
-class LoginResponse (
+data class LoginResponse (
     @SerializedName("id") val id: String,
     @SerializedName("nombre") val nombre: String,
     @SerializedName("apellido") val apellido: String,

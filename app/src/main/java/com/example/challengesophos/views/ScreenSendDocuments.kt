@@ -1,49 +1,81 @@
 package com.example.challengesophos.views
 
 
-
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowDropUp
+import androidx.compose.material.icons.filled.Badge
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.outlined.AddAPhoto
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Backup
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.challengesophos.R
 import com.example.challengesophos.ui.theme.Shapes
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.colorResource
-import androidx.navigation.NavHostController
 
 
 @Composable
 fun ScreenSendDocuments(navigationController: NavHostController) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        HeadBoard()
-        TypeDocument()
-        DocumentNumber()
-        PersonalInformation()
-        City()
-        BottomBottons()
-
+    Scaffold {
+        ToolbarSendDocument(navigationController, "daniela")
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            Spacer(Modifier.height(36.dp))
+            HeadBoard()
+            TypeDocument()
+            DocumentNumber()
+            PersonalInformation()
+            City()
+            BottomBottons()
+        }
     }
+}
 
+@Composable
+fun ToolbarSendDocument(navController: NavHostController, nombre:String) {
+    TopAppBar(
+        title = {
+            Text(
+                text = "Regresar",
+                color = colorResource(id = R.color.purple),
+                fontWeight = FontWeight.W600,
+                modifier = Modifier
+                    .padding(horizontal = 12.dp)
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { navController.navigate("screenMain/Laura Daniela")}) {
+                Icon(
+                    modifier = Modifier.size(32.dp),
+                    imageVector = Icons.Outlined.ArrowBack,
+                    contentDescription = null,
+                    tint = colorResource(id = R.color.purple),
+
+                )
+            }
+        },
+        backgroundColor = Color(0xFFFEFEFE)
+
+    )
 }
 
 
